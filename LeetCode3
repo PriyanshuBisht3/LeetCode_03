@@ -1,0 +1,15 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        seen = {}  # to store the last index of each character
+        max_length = 0
+        start = 0  # starting index of current substring
+
+        for end in range(len(s)):
+            if s[end] in seen and seen[s[end]] >= start:
+                # if the character is already seen and inside the current window
+                start = seen[s[end]] + 1  # move the start to avoid repeating character
+            
+            seen[s[end]] = end  # update the last seen index of the character
+            max_length = max(max_length, end - start + 1)  # update max length if needed
+
+        return max_length
